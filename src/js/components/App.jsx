@@ -1,33 +1,37 @@
 import React from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux'
+
 
 import Nav from './Nav';
 import VideoPlayer from './VideoPlayer';
 import VideoList from './VideoList';
+import {getVideos} from '../actions'
 
-import axios from 'axios';
+
 import { YOUTUBE_KEY } from '../config/youtubekey'
 
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      videoList: [],
+      // videoList: [],
       selectedVideo: {}
     }
 
     this.handleSelectedVideo = this.handleSelectedVideo.bind(this);
-    this.getVideos = this.getVideos.bind(this);
+    // this.getVideos = this.getVideos.bind(this);
     this.cbGetVideos = this.cbGetVideos.bind(this);
     this.cbUpdateVideos = this.cbUpdateVideos.bind(this);
   }
 
-  getVideos(query, cb) {
-    const fixed = 'https://www.googleapis.com/youtube/v3/search';
-    let url = fixed + '?part=snippet' + '&maxResults=5' + '&q='+ query + '&key='+ YOUTUBE_KEY;
-    axios.get(url).then(cb);
-  }
+  // getVideos(query, cb) {
+  //   const fixed = 'https://www.googleapis.com/youtube/v3/search';
+  //   let url = fixed + '?part=snippet' + '&maxResults=5' + '&q='+ query + '&key='+ YOUTUBE_KEY;
+  //   axios.get(url).then(cb);
+  // }
 
   cbGetVideos(data) {
     this.setState({
@@ -49,12 +53,14 @@ export default class App extends React.Component {
   }
 
   render() {
-    let { selectedVideo, videoList } = this.state;
+    let { selectedVideo } = this.state;
+    let {getVideos}=this.props
+    console.log('the getvideos function returns',getVideos)
 
     return (
       <div className="app">
         <Nav 
-          getVideos={this.getVideos} 
+          getVideos={this.props.getVideos} 
           cbUpdateVideos={this.cbUpdateVideos}
         />
         <div className="col-md-7">
@@ -62,7 +68,7 @@ export default class App extends React.Component {
         </div>
         <div className="col-md-5">
           <VideoList 
-            videoList={videoList} 
+            videoList={this.props.videoList} 
             handleSelectedVideo={this.handleSelectedVideo}
           />
         </div>
@@ -71,9 +77,17 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getVideos('javascript', this.cbGetVideos);
+    this.props.getVideos('javascript');
   }
 
 
 
 };
+
+// function mapStateToProps(state) {
+//   return {
+//     videoList:state.videoList
+//   }
+// }
+
+export default connect(null,{getVideos})(App)

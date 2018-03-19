@@ -12,9 +12,9 @@ const Nav = (props) => {
   );
 };
 
-Nav.propTypes = {
-  getVideos: PropTypes.func.isRequired,
-  cbUpdateVideos: PropTypes.func.isRequired
-}
+// Nav.propTypes = {
+//   getVideos: PropTypes.func.isRequired,
+//   cbUpdateVideos: PropTypes.func.isRequired
+// }
 
 export default Nav;

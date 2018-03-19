@@ -35,10 +35,10 @@ export default class Search extends React.Component {
   }
 };
 
-Search.propTypes = {
-  getVideos: PropTypes.func.isRequired,
-  cbUpdateVideos: PropTypes.func.isRequired
-}
+// Search.propTypes = {
+//   getVideos: PropTypes.func.isRequired,
+//   cbUpdateVideos: PropTypes.func.isRequired
+// }
 
 
 

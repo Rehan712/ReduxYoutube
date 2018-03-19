@@ -27,9 +27,9 @@ const VideoPlayer = ({selectedVideo}) => {
   )
 };
 
-VideoPlayer.propTypes = {
-  selectedVideo: PropTypes.object.isRequired,
-}
+// VideoPlayer.propTypes = {
+//   selectedVideo: PropTypes.object.isRequired,
+// }
 
 export default VideoPlayer;
 
